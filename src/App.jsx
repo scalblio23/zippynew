@@ -18,28 +18,35 @@ const STORAGE_KEY = 'fincheck_business_loans_v1'
 /* ============================================================
    Survey data
    ============================================================ */
-const SLIDER_MIN = 5000
-const SLIDER_MAX = 1000000
-const SLIDER_STEP = 5000
+const SLIDER_MIN = 50000
+const SLIDER_MAX = 2000000
+const SLIDER_STEP = 10000
 
 const PURPOSE_OPTS = [
-  'Working Capital',
-  'Equipment',
-  'Inventory',
-  'Expansion',
-  'Refinance Debt',
-  'Marketing',
+  'Purchase a Home',
+  'Refinance',
+  'Investment Property',
+  'Construction',
+  'First Home Buyer',
   'Other',
 ]
-const TIMING_OPTS = ['ASAP', 'Within 2 weeks', 'Within a month', 'Just exploring']
-const PRIORITY_OPTS = ['Lowest Rate', 'Speed of Funding', 'Loan Amount', 'Repayment Terms']
-const REVENUE_OPTS = [
-  '$0 - $5,000',
-  '$5,000 - $10,000',
-  '$10,000 - $25,000',
-  '$25,000 - $50,000',
-  '$50,000 - $100,000',
-  '$100,000+',
+const TIMING_OPTS = ['ASAP', 'Within 30 Days', '1-3 Months', '3-6 Months', 'Just Researching']
+const PRIORITY_OPTS = ['Lowest Rate', 'Flexible Repayments', 'Offset Account', 'Fast Approval', 'Lower Monthly Repayments']
+const EMPLOYMENT_OPTS = [
+  'Full-Time',
+  'Part-Time',
+  'Self-Employed',
+  'Contractor',
+  'Casual',
+  'Retired',
+]
+const INCOME_OPTS = [
+  'Under $50k',
+  '$50k - $80k',
+  '$80k - $120k',
+  '$120k - $180k',
+  '$180k - $250k',
+  '$250k+',
 ]
 const CREDIT_OPTS = ['Excellent (720+)', 'Good (680-719)', 'Fair (640-679)', 'Poor (<640)']
 
@@ -55,18 +62,17 @@ const TOTAL_STEPS = 7 // quiz steps (excludes landing + thank-you)
 const fmt = (n) => '$' + Number(n).toLocaleString('en-AU')
 
 const emptyData = {
-  loanAmount: 250000,
+  loanAmount: 500000,
   purpose: '',
   timing: '',
   priority: '',
-  startMonth: '',
-  startYear: '',
-  revenue: '',
+  employment: '',
+  income: '',
   creditScore: '',
   fullName: '',
   email: '',
   mobile: '',
-  businessName: '',
+  propertyState: '',
   birthDate: '',
   address: '',
 }
@@ -262,7 +268,7 @@ export default function App() {
               <p className="sub">Get Access To 100+ Lenders In Minutes</p>
             </div>
             <div className="card">
-              <h2 className="q-title">How much do you need?</h2>
+              <h2 className="q-title">How much do you want to borrow?</h2>
               <div className="slider-wrap">
                 <input
                   type="range"
@@ -292,7 +298,7 @@ export default function App() {
 
         {step === 1 && (
           <SelectStep
-            title="What do you need the money for?"
+            title="What type of home loan are you looking for?"
             options={PURPOSE_OPTS}
             value={data.purpose}
             onSelect={(v) => pick('purpose', v)}
@@ -301,7 +307,7 @@ export default function App() {
 
         {step === 2 && (
           <SelectStep
-            title="When do you need the money?"
+            title="When are you looking to get a home loan?"
             options={TIMING_OPTS}
             value={data.timing}
             onSelect={(v) => pick('timing', v)}
@@ -318,52 +324,21 @@ export default function App() {
         )}
 
         {step === 4 && (
-          <div className="card">
-            <h2 className="q-title">When did your business start?</h2>
-            <div className="fields">
-              <div className="row-2">
-                <div className="field">
-                  <label>Month</label>
-                  <select value={data.startMonth} onChange={(e) => set('startMonth', e.target.value)}>
-                    <option value="">Select month</option>
-                    {MONTHS.map((m) => (
-                      <option key={m} value={m}>
-                        {m}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="field">
-                  <label>Year</label>
-                  <select value={data.startYear} onChange={(e) => set('startYear', e.target.value)}>
-                    <option value="">Select year</option>
-                    {YEARS.map((y) => (
-                      <option key={y} value={y}>
-                        {y}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <button
-              className="btn btn-center"
-              disabled={!data.startMonth || !data.startYear}
-              onClick={next}
-            >
-              Continue
-            </button>
-          </div>
+          <SelectStep
+            title="What's your employment status?"
+            options={EMPLOYMENT_OPTS}
+            value={data.employment}
+            onSelect={(v) => pick('employment', v)}
+          />
         )}
 
         {step === 5 && (
           <SelectStep
-            title="What's your business revenue?"
-            help="Monthly average for the last 3 months"
-            options={REVENUE_OPTS}
-            value={data.revenue}
+            title="What's your annual household income?"
+            options={INCOME_OPTS}
+            value={data.income}
             cols
-            onSelect={(v) => pick('revenue', v)}
+            onSelect={(v) => pick('income', v)}
           />
         )}
 
@@ -396,7 +371,7 @@ export default function App() {
                 <input
                   type="email"
                   inputMode="email"
-                  placeholder="john@business.com.au"
+                  placeholder="john@email.com.au"
                   value={data.email}
                   onChange={(e) => set('email', e.target.value)}
                 />
@@ -414,14 +389,14 @@ export default function App() {
                 {errors.mobile && <span className="err">{errors.mobile}</span>}
               </div>
               <div className="field">
-                <label>Business Name</label>
-                <input
-                  type="text"
-                  placeholder="Your business"
-                  value={data.businessName}
-                  onChange={(e) => set('businessName', e.target.value)}
-                />
-                {errors.businessName && <span className="err">{errors.businessName}</span>}
+                <label>Property State</label>
+                <select value={data.propertyState} onChange={(e) => set('propertyState', e.target.value)}>
+                  <option value="">Select state</option>
+                  {['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'ACT', 'NT'].map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+                {errors.propertyState && <span className="err">{errors.propertyState}</span>}
               </div>
               <div className="field">
                 <label>Birth Date</label>
