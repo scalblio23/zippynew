@@ -191,7 +191,7 @@ export default function App() {
     if (!data.fullName.trim()) e.fullName = 'Required'
     if (!/^\S+@\S+\.\S+$/.test(data.email)) e.email = 'Enter a valid email'
     if (data.mobile.replace(/\D/g, '').length < 8) e.mobile = 'Enter a valid number'
-    if (!data.businessName.trim()) e.businessName = 'Required'
+    if (!data.propertyState) e.propertyState = 'Required'
     if (!data.birthDate) e.birthDate = 'Required'
     if (!data.address.trim()) e.address = 'Required'
     setErrors(e)
@@ -209,14 +209,13 @@ export default function App() {
       purpose: data.purpose,
       timing: data.timing,
       priority: data.priority,
-      businessStartMonth: data.startMonth,
-      businessStartYear: data.startYear,
-      monthlyRevenue: data.revenue,
+      employment: data.employment,
+      income: data.income,
       creditScore: data.creditScore,
       fullName: data.fullName.trim(),
       email: data.email.trim(),
       mobile: data.mobile.trim(),
-      businessName: data.businessName.trim(),
+      propertyState: data.propertyState,
       birthDate: data.birthDate,
       address: data.address.trim(),
       pageUrl: window.location.href,
