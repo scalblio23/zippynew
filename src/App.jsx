@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
    CONFIG — replace these two values
    ============================================================ */
 // Your Make.com webhook for this funnel (routes the lead to your Google Sheet)
-const WEBHOOK_URL = 'https://hook.eu1.make.com/laso7f3ith6yz6yoiyhe2pvu2vnouqgx'
+const WEBHOOK_URL = 'https://hook.eu1.make.com/zrg0g98jjwnf0b3zcsjpgydv3xbsr6gg'
 
 // Optional: Google Maps JS API key to enable address autocomplete.
 // Leave blank to fall back to a plain text input (build still works).
