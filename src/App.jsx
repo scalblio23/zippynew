@@ -13,7 +13,7 @@ const GOOGLE_MAPS_KEY = ''
 // Brand parameter used on the Meta Pixel Lead event + sent to the webhook
 const BRAND = 'finchecker'
 
-const STORAGE_KEY = 'fincheck_business_loans_v1'
+const STORAGE_KEY = 'fincheck_home_loans_v1'
 
 /* ============================================================
    Survey data
@@ -191,16 +191,22 @@ export default function App() {
     if (!data.fullName.trim()) e.fullName = 'Required'
     if (!/^\S+@\S+\.\S+$/.test(data.email)) e.email = 'Enter a valid email'
     if (data.mobile.replace(/\D/g, '').length < 8) e.mobile = 'Enter a valid number'
-    if (!data.businessName.trim()) e.businessName = 'Required'
-    if (!data.birthDate) e.birthDate = 'Required'
-    if (!data.address.trim()) e.address = 'Required'
     setErrors(e)
-    return Object.keys(e).length === 0
+    if (Object.keys(e).length > 0) {
+      const first = document.querySelector('.err')
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return false
+    }
+    return true
   }
 
   const submit = async () => {
     if (!validateContact() || submitting) return
     setSubmitting(true)
+    try { await _doSubmit() } catch (e) { console.error(e) } finally { setSubmitting(false) }
+  }
+
+  const _doSubmit = async () => {
 
     const payload = {
       brand: BRAND,
@@ -209,14 +215,13 @@ export default function App() {
       purpose: data.purpose,
       timing: data.timing,
       priority: data.priority,
-      businessStartMonth: data.startMonth,
-      businessStartYear: data.startYear,
-      monthlyRevenue: data.revenue,
+      employment: data.employment,
+      income: data.income,
       creditScore: data.creditScore,
       fullName: data.fullName.trim(),
       email: data.email.trim(),
       mobile: data.mobile.trim(),
-      businessName: data.businessName.trim(),
+      propertyState: data.propertyState,
       birthDate: data.birthDate,
       address: data.address.trim(),
       pageUrl: window.location.href,
