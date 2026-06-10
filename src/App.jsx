@@ -191,15 +191,22 @@ export default function App() {
     if (!data.fullName.trim()) e.fullName = 'Required'
     if (!/^\S+@\S+\.\S+$/.test(data.email)) e.email = 'Enter a valid email'
     if (data.mobile.replace(/\D/g, '').length < 8) e.mobile = 'Enter a valid number'
-    if (!data.propertyState) e.propertyState = 'Required'
-    if (!data.address.trim()) e.address = 'Required'
     setErrors(e)
-    return Object.keys(e).length === 0
+    if (Object.keys(e).length > 0) {
+      const first = document.querySelector('.err')
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return false
+    }
+    return true
   }
 
   const submit = async () => {
     if (!validateContact() || submitting) return
     setSubmitting(true)
+    try { await _doSubmit() } catch (e) { console.error(e) } finally { setSubmitting(false) }
+  }
+
+  const _doSubmit = async () => {
 
     const payload = {
       brand: BRAND,
