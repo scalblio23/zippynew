@@ -13,7 +13,7 @@ const GOOGLE_MAPS_KEY = ''
 // Brand parameter used on the Meta Pixel Lead event + sent to the webhook
 const BRAND = 'finchecker'
 
-const STORAGE_KEY = 'fincheck_business_loans_v1'
+const STORAGE_KEY = 'fincheck_home_loans_v1'
 
 /* ============================================================
    Survey data
@@ -192,7 +192,6 @@ export default function App() {
     if (!/^\S+@\S+\.\S+$/.test(data.email)) e.email = 'Enter a valid email'
     if (data.mobile.replace(/\D/g, '').length < 8) e.mobile = 'Enter a valid number'
     if (!data.propertyState) e.propertyState = 'Required'
-    if (!data.birthDate) e.birthDate = 'Required'
     if (!data.address.trim()) e.address = 'Required'
     setErrors(e)
     return Object.keys(e).length === 0
