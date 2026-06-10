@@ -257,9 +257,7 @@ export default function App() {
           <>
             <div className="hero">
               <h1>
-                Compare Business Loan
-                <br />
-                Offers In 30 Seconds
+                Compare Home Loan Offers In Seconds
               </h1>
               <p className="sub">Get Access To 100+ Lenders In Minutes</p>
             </div>
