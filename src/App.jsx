@@ -30,21 +30,23 @@ const PURPOSE_OPTS = [
   'First Home Buyer',
   'Other',
 ]
-const TIMING_OPTS = ['ASAP', 'Within 1 month', '1–3 months', 'Just exploring']
-const PRIORITY_OPTS = ['Lowest Rate', 'Flexible Repayments', 'Offset Account', 'Fast Approval']
+const TIMING_OPTS = ['ASAP', 'Within 30 Days', '1-3 Months', '3-6 Months', 'Just Researching']
+const PRIORITY_OPTS = ['Lowest Rate', 'Flexible Repayments', 'Offset Account', 'Fast Approval', 'Lower Monthly Repayments']
 const EMPLOYMENT_OPTS = [
-  'Full-Time Employed',
-  'Part-Time Employed',
+  'Full-Time',
+  'Part-Time',
   'Self-Employed',
-  'Other',
+  'Contractor',
+  'Casual',
+  'Retired',
 ]
 const INCOME_OPTS = [
-  'Under $50,000',
-  '$50,000 - $100,000',
-  '$100,000 - $150,000',
-  '$150,000 - $200,000',
-  '$200,000 - $300,000',
-  '$300,000+',
+  'Under $50k',
+  '$50k - $80k',
+  '$80k - $120k',
+  '$120k - $180k',
+  '$180k - $250k',
+  '$250k+',
 ]
 const CREDIT_OPTS = ['Excellent (720+)', 'Good (680-719)', 'Fair (640-679)', 'Poor (<640)']
 
