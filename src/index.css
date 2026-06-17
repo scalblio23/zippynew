@@ -366,6 +366,13 @@ input[type='range'].slider::-moz-range-thumb {
 
 .thanks .calendly-inline-widget {
   margin-top: 24px;
+  width: 100%;
+}
+
+@media (max-width: 460px) {
+  .thanks .calendly-inline-widget {
+    height: 880px !important;
+  }
 }
 .thanks .tick {
   width: 78px;
