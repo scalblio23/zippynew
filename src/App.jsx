@@ -439,22 +439,18 @@ export default function App() {
         {/* ---------------- THANK YOU ---------------- */}
         {step === 8 && (
           <div className="thanks">
-            <div className="tick">
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M5 13l4 4L19 7"
-                  stroke="#2d5bff"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <h2>You're all set!</h2>
-            <p>
-              We're matching you with lenders now. A finance specialist will be in touch shortly to
-              walk you through your offers.
-            </p>
+            <h2>Book in your free loan strategy call</h2>
+            <p>One of our home loan specialists will walk you through your best options.</p>
+            <div
+              className="calendly-inline-widget"
+              data-url="https://calendly.com/zippyfinancial/45min"
+              style={{ minWidth: '320px', height: '700px' }}
+            />
+            <script
+              type="text/javascript"
+              src="https://assets.calendly.com/assets/external/widget.js"
+              async
+            />
           </div>
         )}
 
