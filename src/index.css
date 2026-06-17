@@ -360,8 +360,12 @@ input[type='range'].slider::-moz-range-thumb {
 /* ---------- Thank you ---------- */
 .thanks {
   text-align: center;
-  padding: 40px 24px;
+  padding: 24px 0 0;
   animation: fade-up 0.45s ease both;
+}
+
+.thanks .calendly-inline-widget {
+  margin-top: 24px;
 }
 .thanks .tick {
   width: 78px;
