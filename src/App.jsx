@@ -251,20 +251,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // Load Calendly widget when thank-you step is reached
-  useEffect(() => {
-    if (step !== 8) return
-    if (document.getElementById('calendly-script')) {
-      if (window.Calendly) window.Calendly.initInlineWidgets()
-      return
-    }
-    const s = document.createElement('script')
-    s.id = 'calendly-script'
-    s.src = 'https://assets.calendly.com/assets/external/widget.js'
-    s.async = true
-    document.head.appendChild(s)
-  }, [step])
-
   // scroll to top on step change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -459,6 +445,11 @@ export default function App() {
               className="calendly-inline-widget"
               data-url="https://calendly.com/zippyfinancial/45min"
               style={{ minWidth: '320px', height: '700px' }}
+            />
+            <script
+              type="text/javascript"
+              src="https://assets.calendly.com/assets/external/widget.js"
+              async
             />
           </div>
         )}
